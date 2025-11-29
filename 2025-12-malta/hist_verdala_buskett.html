@@ -1,0 +1,157 @@
+"<!DOCTYPE html>
+<html lang=""zh-CN"">
+<head>
+  <meta charset=""UTF-8"">
+  <title>Verdala 宫与 Buskett 林地 · 马耳他旅行讲解</title>
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, ""Segoe UI"", Roboto, ""PingFang SC"",
+                   ""Hiragino Sans GB"", ""Microsoft YaHei"", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px 12px 40px;
+    }
+    header {
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 6px;
+      color: #154c79;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .btn {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #154c79;
+      background: #fff;
+      color: #154c79;
+      cursor: pointer;
+    }
+    .btn.stop {
+      border-color: #999;
+      color: #555;
+    }
+    .btn:hover {
+      background: #154c79;
+      color: #fff;
+    }
+    .btn.stop:hover {
+      background: #666;
+      color: #fff;
+    }
+    .back-link {
+      font-size: 13px;
+      text-decoration: none;
+      color: #1f6aa6;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 12px 16px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    #content p {
+      font-size: 14px;
+      line-height: 1.8;
+      margin: 0 0 10px;
+      text-align: justify;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 19px; }
+      #content p { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+<div class=""wrapper"">
+  <header>
+    <h1>Verdala 宫与 Buskett 林地</h1>
+    <div class=""subtitle"">总统夏季官邸 · 岛上少见的树林景观</div>
+  </header>
+
+  <div class=""toolbar"">
+    <button class=""btn"" onclick=""speakMain()"">▶ 播放本页讲解</button>
+    <button class=""btn stop"" onclick=""stopSpeak()"">■ 停止朗读</button>
+    <a class=""back-link"" href=""index.html"">← 返回行程总览</a>
+  </div>
+
+  <div class=""card"" id=""content"">
+      <p>Verdala 宫位于 Buskett 林地之上，是马耳他少数被树林环绕的大型历史建筑之一。现存宫殿建于十六世纪末，由建筑师贾罗拉莫·卡萨尔为骑士团总团长 Hugues Loubenx de Verdalle 设计，外观看上去更像一座四角带塔楼的方形城堡。它建在更早的骑士团狩猎山庄旧址上，周围的 Buskett 则是当年专门用于打猎和耕作的林地。</p>
+      <p>在骑士团时代，这里既是权力人物远离港口尘嚣的避暑之地，也承担一定的象征功能——在资源有限、树木稀少的岛上，拥有一片私人树林本身就是身份的象征。英属时期，Verdala 宫和 San Anton 宫一起成为总督的官邸，后又作为英国王室成员访问马耳他时的住所。如今它是总统的夏季官邸，对公众开放的机会有限，多数时候只能从外部和林地远观。</p>
+      <p>Buskett 本身作为马耳他少见的“森林”，在一年中也承载了各种庆典和节日活动。夏秋季的猎鸟争议、宗教节庆和音乐活动都曾在这里留下痕迹。冬季彩灯步道则把这片历史感很强的宫殿与林地暂时变成童话舞台，在彩灯和装置之间行走时，你们也可以顺便想象几百年前骑士和贵族在这里散步、打猎和社交的景象。</p>
+  </div>
+</div>
+
+<script>
+  let voices = [];
+
+  function loadVoices() {
+    if (!('speechSynthesis' in window)) return;
+    voices = window.speechSynthesis.getVoices() || [];
+  }
+
+  if ('speechSynthesis' in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+
+  function speakText(text) {
+    if (!('speechSynthesis' in window)) {
+      alert('当前浏览器不支持语音朗读，可以直接阅读文字。');
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-CN';
+
+    let zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+    if (!zhVoice) {
+      zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().includes('zh-cn'));
+    }
+    if (zhVoice) {
+      utter.voice = zhVoice;
+    } else if (voices.length > 0) {
+      utter.voice = voices[0];
+    }
+    window.speechSynthesis.speak(utter);
+  }
+
+  function speakMain() {
+    const paras = Array.from(document.querySelectorAll('#content p'));
+    const text = paras.map(p => p.textContent.trim()).join('。');
+    speakText(text);
+  }
+
+  function stopSpeak() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+</script>
+</body>
+</html>
+"
