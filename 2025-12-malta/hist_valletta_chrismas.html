@@ -92,3 +92,30 @@
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = 'zh-CN';
+
+    let zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+    if (!zhVoice) {
+      zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().includes('zh-cn'));
+    }
+    if (zhVoice) {
+      utter.voice = zhVoice;
+    } else if (voices.length > 0) {
+      utter.voice = voices[0];
+    }
+    window.speechSynthesis.speak(utter);
+  }
+
+  function speakMain() {
+    const paras = Array.from(document.querySelectorAll('#content p'));
+    const text = paras.map(p => p.textContent.trim()).join('。');
+    speakText(text);
+  }
+
+  function stopSpeak() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+</script>
+</body>
+</html>
