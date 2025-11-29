@@ -1,15 +1,15 @@
-"<!DOCTYPE html>
-<html lang=""zh-CN"">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset=""UTF-8"">
-  <title>圣乔治广场与跨年夜 · 马耳他旅行讲解</title>
-  <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+  <meta charset="UTF-8">
+  <title>圣乔治广场新年倒计时 St George's Square · 马耳他旅行讲解</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, ""Segoe UI"", Roboto, ""PingFang SC"",
-                   ""Hiragino Sans GB"", ""Microsoft YaHei"", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       background: #f5f5f5;
       color: #222;
     }
@@ -82,76 +82,4 @@
     }
     @media (max-width: 600px) {
       h1 { font-size: 19px; }
-      #content p { font-size: 13px; }
-    }
-  </style>
-</head>
-<body>
-<div class=""wrapper"">
-  <header>
-    <h1>圣乔治广场与跨年夜</h1>
-    <div class=""subtitle"">瓦莱塔城市客厅 · 权力与庆典的同一舞台</div>
-  </header>
-
-  <div class=""toolbar"">
-    <button class=""btn"" onclick=""speakMain()"">▶ 播放本页讲解</button>
-    <button class=""btn stop"" onclick=""stopSpeak()"">■ 停止朗读</button>
-    <a class=""back-link"" href=""index.html"">← 返回行程总览</a>
-  </div>
-
-  <div class=""card"" id=""content"">
-      <p>圣乔治广场位于瓦莱塔几何中心，是城市最重要的公共空间之一。一侧是宏伟的总团长宫殿立面，这里曾是圣约翰骑士团最高领袖的官邸，后来成为英国总督府，如今是马耳他总统办公室。宫殿建筑从十六世纪开始兴建，之后不断扩建和巴洛克化，内部的挂毯厅、武器库和仪式大厅记录了岛上数百年的政治与军事史。</p>
-      <p>广场本身在历史上经历过多次功能转换：曾是阅兵场、仪式空间，也曾作为停放车辆的停车场。近年通过改造重新回归以行人为主的广场形态，铺装与水景强调低调的几何秩序，把视线自然引向宫殿立面。2024 年宫殿完成大规模修复并重新开放，使得广场与建筑再次作为整体出现在公众视野中。</p>
-      <p>每逢国庆、重要纪念日以及跨年夜，圣乔治广场都会搭建舞台和灯光装置，成为全国活动的核心现场之一。跨年当晚，你们会和本地家庭、年轻人以及来自世界各地的游客一起在这里倒数，听乐队和 DJ 演出，等待远处港口上空的烟花升起。想到这里白天是严肃的政治与仪式空间，夜里却变成人人都可以占据的城市客厅，这种反差本身就是瓦莱塔迷人的地方。</p>
-  </div>
-</div>
-
-<script>
-  let voices = [];
-
-  function loadVoices() {
-    if (!('speechSynthesis' in window)) return;
-    voices = window.speechSynthesis.getVoices() || [];
-  }
-
-  if ('speechSynthesis' in window) {
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-  }
-
-  function speakText(text) {
-    if (!('speechSynthesis' in window)) {
-      alert('当前浏览器不支持语音朗读，可以直接阅读文字。');
-      return;
-    }
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'zh-CN';
-
-    let zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
-    if (!zhVoice) {
-      zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().includes('zh-cn'));
-    }
-    if (zhVoice) {
-      utter.voice = zhVoice;
-    } else if (voices.length > 0) {
-      utter.voice = voices[0];
-    }
-    window.speechSynthesis.speak(utter);
-  }
-
-  function speakMain() {
-    const paras = Array.from(document.querySelectorAll('#content p'));
-    const text = paras.map(p => p.textContent.trim()).join('。');
-    speakText(text);
-  }
-
-  function stopSpeak() {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
-  }
-</script>
-</body>
-</html>
-"
+      #content p { font-size: 13
