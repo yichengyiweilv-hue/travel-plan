@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>国家考古博物馆 National Museum of Archaeology · 马耳他旅行讲解</title>
+  <title>圣约翰副主教座堂 St John’s Co‑Cathedral · 马耳他旅行讲解</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -35,7 +35,33 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-@@ -65,63 +65,63 @@
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .btn {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #154c79;
+      background: #fff;
+      color: #154c79;
+      cursor: pointer;
+    }
+    .btn.stop {
+      border-color: #999;
+      color: #555;
+    }
+    .btn:hover {
+      background: #154c79;
+      color: #fff;
+    }
+    .btn.stop:hover {
+      background: #666;
+      color: #fff;
+    }
+    .back-link {
+      font-size: 13px;
+      text-decoration: none;
       color: #1f6aa6;
     }
     .back-link:hover {
@@ -63,8 +89,8 @@
 <body>
 <div class="wrapper">
   <header>
-    <h1>国家考古博物馆 National Museum of Archaeology</h1>
-    <div class="subtitle">瓦莱塔共和国大街 · 走进马耳他六千年史</div>
+    <h1>圣约翰副主教座堂 St John’s Co‑Cathedral</h1>
+    <div class="subtitle">骑士团核心教堂 · 卡拉瓦乔名作所在地</div>
   </header>
 
   <div class="toolbar">
@@ -74,9 +100,9 @@
   </div>
 
   <div class="card" id="content">
-      <p>国家考古博物馆位于瓦莱塔共和国大街上一座十六世纪骑士旅馆内，原本是普罗旺斯语族骑士的 Auberge，如今则成为马耳他史前与古代文明的入口。展厅按照年代顺序排列，从最早的新石器时代村落，到巨石神庙、地下墓室和青铜时代遗迹，为岛上六千多年连续居住史提供了物证。</p>
-      <p>这里最著名的展品包括出土于 Ħal Saflieni 地下墓穴的“睡美人”雕像、来自 Ħaġar Qim 和 Tarxien 神庙的丰腴女神像、刻有螺旋纹饰的石块，以及各种陶器、工具和装饰品。与宏大的神庙遗址相比，这些体量不大却极富细节的文物让人更容易想象当时人们的日常生活：他们如何制作食物、如何装点家园，又如何理解生与死。</p>
-      <p>博物馆还通过模型和多媒体解释巨石神庙的建筑技术与天文对齐方式，例如 Mnajdra 中央神庙入口与春分日出的关系。对你们来说，如果在行程前半段抽一小时在这里快速浏览，那么后面去看 Ħaġar Qim、Mnajdra、Tarxien 或 Gozo 的 Ġgantija 时，就会更容易在石头间“读懂”这些建筑背后的文化和宗教意义。</p>
+      <p>圣约翰副主教座堂建于十六世纪七十年代，是圣约翰骑士团在新都瓦莱塔的核心宗教建筑。外立面十分朴素，甚至带着一点堡垒感，但一走进内部，几乎所有墙面和拱顶都被极其华丽的巴洛克装饰覆盖：拱顶上是画家马蒂亚·普雷蒂绘制的圣约翰生平故事，墙面布满雕刻与金箔，地板则由四百多块大理石墓碑拼成，安葬着来自欧洲各地的贵族骑士与重要人物。</p>
+      <p>教堂两侧的礼拜堂分别属于不同“语族”的骑士团成员，每个礼拜堂都有独特的祭坛装饰和纹章细节，反映出西欧各地区的艺术传统。其中最著名的是卡拉瓦乔画作所在的小祈祷室，挂有《圣约翰被斩首》和《写字的圣哲罗姆》两幅巅峰之作。《圣约翰被斩首》是他创作过的最大尺寸画作，也是唯一署名的作品，签名就“写在”画面中血泊边缘，被许多人视作巴洛克绘画的高光时刻。</p>
+      <p>卡拉瓦乔本人在马耳他的经历同样戏剧性：他在罗马因命案逃亡，获得骑士团接纳与重要委托，却又因卷入暴力事件被监禁、逃狱并遭逐出团体，只在岛上停留短短一年多时间。留下的这几幅画却彻底改变了瓦莱塔的艺术地位。如今的圣约翰副主教座堂通过展厅与语音导览介绍建筑和艺术品的历史，你在这里不仅是在看“漂亮教堂”，而是在一个空间里感受宗教、政治、荣誉与放逐交织的故事。</p>
   </div>
 </div>
 
@@ -99,7 +125,10 @@
       return;
     }
     window.speechSynthesis.cancel();
-@@ -132,26 +132,25 @@
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-CN';
+
+    let zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
     if (!zhVoice) {
       zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().includes('zh-cn'));
     }
